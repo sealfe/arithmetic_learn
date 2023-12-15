@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+    compileOnly("org.projectlombok:lombok:1.18.20")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 }
 
