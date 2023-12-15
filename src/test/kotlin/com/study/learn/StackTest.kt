@@ -1,6 +1,7 @@
 package com.study.learn
 
 import org.junit.jupiter.api.Test
+import org.study.ResultInfo
 import java.util.*
 import org.study.Node as Node
 
@@ -9,19 +10,29 @@ class StackTest {
     fun test_get_left_min_and_right_min() {
         val list: List<Int> = mutableListOf(3, 4, 2, 6, 5, 7, 1, 9, 8)
         val stack: Stack<Node?> = Stack()
-        val leftMin: MutableList<Int?> = ArrayList()
-        val rightMin: List<Int> = ArrayList()
+        val results: MutableList<ResultInfo> = mutableListOf()
         for (i in list.indices) {
-            val peek: Node? = stack.peek()
-            if (peek == null) {
-                leftMin.add(null)
-            } else if (peek <= list[i]) {
-                leftMin.add(peek)
-            } else {
-                stack.pop()
+            val node = Node(mutableListOf(i), list[i])
+            while (stack.isNotEmpty() && stack.peek()!! > node) {
+                stack.pop()?.let { poppedNode ->
+                    addResultInfo(results, poppedNode, stack.peek(), node)
+                }
             }
-            stack.push(list[i])
+            stack.push(node)
         }
+
+        while (stack.isNotEmpty()) {
+            stack.pop()?.let { poppedNode ->
+                addResultInfo(results, poppedNode, stack.peek(), null)
+        }
+        }
+
+        results.sortBy { it.index }
+        println(results)
+    }
+
+    private fun addResultInfo(results: MutableList<ResultInfo>, poppedNode: Node, leftNode: Node?, rightNode: Node?) {
+        results.add(ResultInfo(poppedNode.indexs[0], poppedNode.value, leftNode, rightNode))
     }
 }
 

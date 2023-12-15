@@ -1,11 +1,10 @@
 package org.study
 
 import lombok.Data
+import lombok.ToString
 
 @Data
-class Node() {
-    var value: Int = 0
-    var indexs: MutableList<Int> = mutableListOf()
+class Node(var indexs: MutableList<Int> = mutableListOf(), var value: Int = 0) {
 
     operator fun compareTo(node: Node): Int {
         return this.value - node.value
@@ -19,5 +18,10 @@ class Node() {
     operator fun compareTo(value: Int): Int {
         return this.value - value
     }
+
+    override fun toString(): String {
+        return "Node(indexs=$indexs, value=$value)"
+    }
+
 
 }
