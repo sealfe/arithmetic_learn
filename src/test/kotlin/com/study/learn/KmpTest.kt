@@ -38,6 +38,17 @@ class KmpTest {
     }
 
 
+    fun kmp(arry: List<String>, target: List<String>): Int {
+        val nextArry = nextArray(target)
+        var i = 0
+        var j = 0
+        while (i < arry.size && j < target.size) {
+
+        }
+
+
+    }
+
     @Test
     fun test_nextArry(){
         val nextArry = nextArray(listOf("a", "a", "a", "a", "a", "a", "a", "a"))
